@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <mat-form-field class="!block">
+        <mat-label>Category </mat-label>
+        <mat-select name="category" [(ngModel)]="selectCategory">
+          <mat-option *ngFor="let option of categoryList"  (click)="onChange(option)"
+            [value]="option.id">
+            {{option.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row" *ngIf="selectCategory">
+    <div class="card-border mb-5">
+      <mat-table [dataSource]="dataSource" matSort matTableExporter>
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+          <mat-cell *matCellDef="let item" data-label="Stock">
+           
+              <a class="mr-10"href="javascript: void(0);" (click)="bookDetails(item)">
+
+                {{item?.name}}
+            </a>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="price">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Price</mat-header-cell>
+          <mat-cell *matCellDef="let item" data-label="Stock">{{item?.price}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="stock">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Stock</mat-header-cell>
+            <mat-cell *matCellDef="let item" data-label="Stock">{{item?.stock}}</mat-cell>
+          </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <mat-card *ngIf="this.loading == true" style="display: flex; justify-content: center; align-items: center">
+        <mat-progress-spinner color="primary" mode="indeterminate">
+        </mat-progress-spinner>
+      </mat-card>
+
+      <mat-card *ngIf="!this.dataSource?.filteredData?.length" [hidden]="this.loading == true" class="no-results">
+        <div class="row ">
+          <div class="col-12">
+            <img src="../../../assets/img/empty.svg" width="60px">
+          </div>
+          <div class="col-12">
+            <p class="text-center">No records</p>
+          </div>
+        </div>
+      </mat-card>
+
+      <mat-paginator [pageSize]="20" [pageSizeOptions]="[5, 10, 25, 50, 100]"></mat-paginator>
+    </div>
+  </div>
+</div>

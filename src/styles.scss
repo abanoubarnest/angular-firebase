@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+@import './assets/scss/main.scss';
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.open-dialog{
+    .mat-dialog-title{
+        color: white;
+        padding: 15px;
+        background: #683ab7;
+    }
+    .mat-dialog-content {
+        display: block;
+        margin: 0;
+        padding: 0 13px;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .mat-dialog-actions {
+        padding: 8px 10px;
+        display: flex;
+        flex-wrap: wrap;
+        min-height: 52px;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .mat-dialog-container{
+        padding: 0  !important;
+    }
+}

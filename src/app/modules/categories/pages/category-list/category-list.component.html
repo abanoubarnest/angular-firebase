@@ -1,0 +1,72 @@
+<!--<mat-toolbar class="page-tool-bar">-->
+<!--  <mat-icon matSuffix>dns</mat-icon>-->
+<!--  <span [style.margin-left]="'10px'">Product catalog</span>-->
+<!--</mat-toolbar>-->
+<div class="container-fluid">
+    <mat-card>
+      <div class="row">
+        <div class="col-12">
+    
+          <button mat-raised-button color="primary"  (click)="openDialog()">
+              <mat-icon matSuffix class="mr-2">menu_book</mat-icon>Create</button>
+        </div>
+      </div>
+    </mat-card>
+    <br>
+    <div class="card-border mb-5">
+      <mat-table [dataSource]="dataSource" matSort matTableExporter >
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+          <mat-cell *matCellDef="let item" data-label="Stock">{{item.id}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+            <mat-cell *matCellDef="let item" data-label="Stock">{{item.name}}</mat-cell>
+          </ng-container>
+        <ng-container matColumnDef="edit">
+          <mat-header-cell *matHeaderCellDef class="align-right">Action</mat-header-cell>
+          <mat-cell *matCellDef="let element" class="align-right" data-label="Acción">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Table menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="editCategory(element)">
+                <mat-icon>edit</mat-icon>
+                <span>Edit</span>
+              </button>
+              <button mat-menu-item (click)="deleteCategory(element)">
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <mat-card *ngIf="this.loading == true" style="display: flex; justify-content: center; align-items: center">
+        <mat-progress-spinner
+          color="primary"
+          mode="indeterminate">
+        </mat-progress-spinner>
+      </mat-card>
+  
+      <mat-card *ngIf="!this.dataSource?.filteredData?.length" [hidden]="this.loading == true" class="no-results">
+        <div class="row ">
+          <div class="col-12">
+            <img src="../../../assets/img/empty.svg" width="60px">
+          </div>
+          <div class="col-12">
+            <p class="text-center">No records</p>
+          </div>
+        </div>
+      </mat-card>
+  
+      <mat-paginator  [pageSize]="20"  [pageSizeOptions]="[5, 10, 25, 50, 100]"></mat-paginator>
+    </div>
+  </div>
+  
+  
+  
+  
+  
