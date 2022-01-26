@@ -17,7 +17,7 @@ export class BookListComponent implements OnInit {
   categoryList: any[] = [];
   bookList: Book[] = [];
   selectCategory='';
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   displayedColumns: string[] = ['name', 'price','stock'];
   items: any;
